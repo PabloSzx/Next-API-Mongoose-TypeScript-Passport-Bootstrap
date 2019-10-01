@@ -1,6 +1,7 @@
 import useAxios from "axios-hooks";
 import { NextPage } from "next";
 import { FC, useContext } from "react";
+import { ListGroup } from "react-bootstrap";
 
 import { AuthContext } from "../src/client/components/Auth/Context";
 import { User } from "../src/interfaces";
@@ -18,16 +19,16 @@ const UsersList: FC = () => {
 
   return (
     <div>
-      <ol>
+      <ListGroup>
         {data.map(({ email, password }, key) => (
-          <li key={key}>
-            <ul>
-              <li>Email: {email}</li>
-              <li>Password: {password}</li>
-            </ul>
-          </li>
+          <ListGroup.Item key={key}>
+            <ListGroup>
+              <ListGroup.Item>Email: {email}</ListGroup.Item>
+              <ListGroup.Item>Password: {password}</ListGroup.Item>
+            </ListGroup>
+          </ListGroup.Item>
         ))}
-      </ol>
+      </ListGroup>
     </div>
   );
 };

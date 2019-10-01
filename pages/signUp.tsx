@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Router from "next/router";
 import { useContext, useEffect, useState } from "react";
+import { Alert, Button, Form } from "react-bootstrap";
 import { isEmail, isLength } from "validator";
 
 import { AuthContext } from "../src/client/components/Auth/Context";
@@ -25,33 +26,37 @@ const SignUpPage: NextPage = () => {
     <>
       {error && (
         <div>
-          <label>{error}</label>
+          <Alert variant="danger">{error}</Alert>
         </div>
       )}
-      <form
-        onSubmit={async e => {
+      <Form
+        onSubmit={async (e: React.SyntheticEvent) => {
           e.preventDefault();
           signUp({ email, password });
         }}
       >
-        <label>Email</label>
-        <input
+        <Form.Label>Email</Form.Label>
+        <Form.Control
           name="email"
           type="email"
           value={email}
-          onChange={({ target: { value } }) => setEmail(value)}
+          onChange={({
+            target: { value },
+          }: React.ChangeEvent<HTMLInputElement>) => setEmail(value)}
         />
-        <label>Password</label>
-        <input
+        <Form.Label>Password</Form.Label>
+        <Form.Control
           name="password"
           type="password"
           value={password}
-          onChange={({ target: { value } }) => setPassword(value)}
+          onChange={({
+            target: { value },
+          }: React.ChangeEvent<HTMLInputElement>) => setPassword(value)}
         />
-        <button disabled={!valid} type="submit">
+        <Button disabled={!valid} type="submit">
           Sign Up
-        </button>
-      </form>
+        </Button>
+      </Form>
     </>
   );
 };
